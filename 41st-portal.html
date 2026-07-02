@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>41st Elite Corps | Portail Communautaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --olive: #3e5c3a;
+    --olive-light: #5c8a54;
+    --olive-pale: #a8c89c;
+    --khaki: #c4a876;
+    --khaki-light: #e0cb9c;
+    --tan-dark: #2a2418;
+    --dark: #0d1410;
+    --dark2: #101a12;
+    --dark3: #16221a;
+    --panel: rgba(20, 32, 20, 0.7);
+    --panel-border: rgba(168, 200, 156, 0.16);
+    --text: #dde8d5;
+    --text-muted: #8ba382;
+    --rust: #c25a2e;
+    --rust-light: #e07a4a;
+    --signal: #d4b430;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* TEXTURE / CAMO BACKDROP */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 700px 400px at 15% 10%, rgba(62,92,58,0.28), transparent 60%),
+      radial-gradient(ellipse 600px 500px at 85% 30%, rgba(196,168,118,0.10), transparent 60%),
+      radial-gradient(ellipse 800px 500px at 50% 90%, rgba(62,92,58,0.22), transparent 65%);
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(168,200,156,0.012) 2px, rgba(168,200,156,0.012) 4px
+    );
+  }
+
+  .site-wrapper {
+    position: relative;
+    z-index: 10;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* HOLO TOP BORDER (stencil stripes) */
+  .top-stripe {
+    height: 6px;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--olive) 0px, var(--olive) 14px,
+      var(--khaki) 14px, var(--khaki) 20px,
+      var(--rust) 20px, var(--rust) 24px,
+      var(--khaki) 24px, var(--khaki) 30px
+    );
+    opacity: 0.9;
+  }
+
+  /* NAV */
+  .nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10, 16, 10, 0.94);
+    border-bottom: 1px solid var(--panel-border);
+    backdrop-filter: blur(10px);
+  }
+  .nav-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; flex-wrap: wrap;
+  }
+  .nav-logo {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.95rem; letter-spacing: 0.15em;
+    color: var(--khaki-light); padding: 0.9rem 0; text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; list-style: none; flex-wrap: wrap; }
+  .nav-links li a {
+    display: block; padding: 0.9rem 0.85rem;
+    font-family: 'Rajdhani', sans-serif; font-size: 0.76rem; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none;
+    border-bottom: 2px solid transparent; transition: all 0.2s;
+  }
+  .nav-links li a:hover { color: var(--olive-pale); border-bottom-color: var(--olive-light); }
+
+  /* HEADER */
+  .header { position: relative; text-align: center; padding: 4.5rem 0 3rem; overflow: hidden; }
+  .header-glow {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 720px; height: 420px;
+    background: radial-gradient(ellipse, rgba(62,92,58,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .crest {
+    width: 130px; height: 130px; margin: 0 auto 1.5rem;
+    filter: drop-shadow(0 0 18px rgba(168,200,156,0.35));
+  }
+  .header-eyebrow {
+    font-family: 'Rajdhani', sans-serif; font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.5em; color: var(--rust-light); text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+  .header-title {
+    font-family: 'Bebas Neue', 'Oswald', sans-serif; font-size: clamp(2.6rem, 7vw, 5rem);
+    font-weight: 400; letter-spacing: 0.05em;
+    color: var(--khaki-light);
+    text-shadow: 0 0 30px rgba(196,168,118,0.35), 0 4px 0 rgba(0,0,0,0.4);
+    line-height: 1; margin-bottom: 0.6rem;
+  }
+  .header-subtitle {
+    font-family: 'Oswald', sans-serif; font-size: clamp(0.95rem, 2vw, 1.25rem);
+    font-weight: 500; color: var(--olive-pale); letter-spacing: 0.1em;
+    margin-bottom: 1.5rem; text-transform: uppercase;
+  }
+  .header-line { display:flex; align-items:center; justify-content:center; gap:1.2rem; margin: 1.5rem 0; }
+  .header-line::before, .header-line::after {
+    content:''; flex:1; max-width: 260px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--khaki), transparent);
+  }
+  .header-line span { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:0.35em; color: var(--khaki); opacity:0.75; }
+
+  .hero-lead {
+    max-width: 700px; margin: 0 auto 1rem; font-size: 1rem; line-height: 1.8;
+    color: var(--text-muted); font-weight: 400;
+  }
+  .hero-tags { display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; margin-top: 1.25rem; }
+  .hero-tag {
+    font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.12em;
+    text-transform:uppercase; padding:0.4rem 0.95rem; border-radius:2px;
+    border:1px solid rgba(168,200,156,0.3); background: rgba(62,92,58,0.12); color: var(--olive-pale);
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    display:flex; gap:1px; margin: 3rem 0 2.5rem;
+    background: var(--panel-border); border-radius:2px; overflow:hidden;
+  }
+  .stat-item { flex:1; background: var(--panel); padding: 1rem 1rem; text-align:center; }
+  .stat-num {
+    font-family:'Bebas Neue',sans-serif; font-size:1.9rem; color: var(--khaki-light);
+    display:block; line-height:1; text-shadow: 0 0 12px rgba(196,168,118,0.3);
+  }
+  .stat-label {
+    font-size:0.68rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
+    color: var(--text-muted); display:block; margin-top:0.3rem;
+  }
+
+  /* SECTION BLOCK */
+  .page-content { padding: 1rem 0 6rem; }
+  .section-block { margin-bottom: 3.5rem; scroll-margin-top: 5.5rem; }
+  .section-header {
+    display:flex; align-items:center; gap:1.25rem; margin-bottom: 1.75rem;
+    padding-bottom: 0.9rem; border-bottom: 1px solid var(--panel-border); position: relative;
+  }
+  .section-header::after {
+    content:''; position:absolute; bottom:-1px; left:0; width: 70px; height:2px;
+    background: linear-gradient(to right, var(--rust), var(--khaki));
+  }
+  .section-icon {
+    width: 46px; height: 46px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    background: rgba(62,92,58,0.15); border:1px solid rgba(168,200,156,0.3); border-radius: 3px;
+    font-size: 1.3rem; transform: rotate(45deg);
+  }
+  .section-icon span { display:block; transform: rotate(-45deg); }
+  .section-title {
+    font-family:'Oswald',sans-serif; font-size: 1.2rem; font-weight:600; letter-spacing:0.06em;
+    color: var(--khaki-light); text-transform: uppercase;
+  }
+  .section-tag {
+    font-family:'Rajdhani',sans-serif; font-size:0.68rem; font-weight:700; letter-spacing:0.28em;
+    color: var(--olive-pale); text-transform:uppercase; margin-top:0.2rem; opacity:0.8;
+  }
+
+  /* LINK GRID */
+  .link-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media(max-width:900px){ .link-grid{ grid-template-columns: repeat(2,1fr);} }
+  @media(max-width:600px){ .link-grid{ grid-template-columns: 1fr;} }
+
+  .link-card {
+    position:relative; display:flex; align-items:center; gap:0.9rem;
+    padding: 1.05rem 1.2rem; background: var(--panel); border:1px solid var(--panel-border);
+    border-radius: 2px; text-decoration:none; color: var(--text);
+    transition: all 0.22s ease; overflow:hidden;
+  }
+  .link-card::before {
+    content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background: linear-gradient(to bottom, var(--rust), var(--khaki)); opacity:0; transition: opacity 0.2s;
+  }
+  .link-card:hover {
+    border-color: rgba(196,168,118,0.4); background: rgba(62,92,58,0.16);
+    transform: translateX(4px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+  }
+  .link-card:hover::before { opacity:1; }
+  .link-icon { font-size:1.25rem; flex-shrink:0; opacity:0.9; }
+  .link-name {
+    flex:1; font-family:'Rajdhani',sans-serif; font-size:0.92rem; font-weight:600; letter-spacing:0.02em;
+  }
+  .link-arrow { color: var(--khaki); font-size:1rem; flex-shrink:0; opacity:0.7; transition: transform 0.2s; }
+  .link-card:hover .link-arrow { transform: translate(3px,-2px); opacity:1; }
+
+  /* FEATURED / ACCUEIL CARD */
+  .featured-card {
+    display:flex; align-items:center; gap:1.75rem; padding: 1.75rem 2rem;
+    background: linear-gradient(135deg, rgba(62,92,58,0.18), rgba(20,32,20,0.6));
+    border:1px solid rgba(168,200,156,0.3); border-radius:3px; margin-bottom:3rem;
+    text-decoration:none; color: var(--text); flex-wrap:wrap;
+  }
+  .featured-card:hover { border-color: rgba(196,168,118,0.5); }
+  .featured-icon {
+    width:64px; height:64px; flex-shrink:0; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:1.8rem;
+    background: rgba(0,0,0,0.25); border:1px solid var(--khaki);
+    box-shadow: 0 0 24px rgba(196,168,118,0.15);
+  }
+  .featured-text { flex:1; min-width:200px; }
+  .featured-title {
+    font-family:'Oswald',sans-serif; font-size:1.15rem; font-weight:600; color: var(--khaki-light);
+    text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.3rem;
+  }
+  .featured-desc { font-size:0.87rem; color: var(--text-muted); line-height:1.55; }
+  .featured-arrow { font-size:1.4rem; color: var(--khaki); flex-shrink:0; }
+
+  /* DIVIDER */
+  .divider { display:flex; align-items:center; gap:1.25rem; margin: 2.5rem 0; opacity:0.5; }
+  .divider-line { flex:1; height:1px; background: linear-gradient(to right, transparent, rgba(168,200,156,0.5), transparent); }
+  .divider-dot { width:6px; height:6px; background: var(--khaki); transform: rotate(45deg); }
+
+  /* FOOTER */
+  .site-footer {
+    position:relative; z-index:10; border-top:1px solid var(--panel-border);
+    padding: 2.25rem 2rem; text-align:center;
+  }
+  .footer-text {
+    font-family:'Rajdhani',sans-serif; font-size:0.78rem; letter-spacing:0.22em;
+    color: var(--text-muted); text-transform:uppercase;
+  }
+  .footer-text span { color: var(--khaki); }
+  .footer-sub { margin-top:0.5rem; font-size:0.68rem; letter-spacing:0.15em; color: var(--text-muted); opacity:0.55; }
+</style>
+</head>
+<body>
+
+<div class="top-stripe"></div>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo">⛨ 41ST · 9e CORPS D'ASSAUT</a>
+    <ul class="nav-links">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#apprentissage">Apprentissage</a></li>
+      <li><a href="#info">Info. Importante</a></li>
+      <li><a href="#specialisation">Spécialisation</a></li>
+      <li><a href="#divers">Divers</a></li>
+      <li><a href="#monde">Espèces &amp; Systèmes</a></li>
+      <li><a href="#documents">Documents Tiers</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="site-wrapper" id="top">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-glow"></div>
+    <svg class="crest" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="crestGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#a8c89c" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#a8c89c" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <circle cx="60" cy="60" r="58" fill="url(#crestGlow)" stroke="rgba(168,200,156,0.35)" stroke-width="1"/>
+      <polygon points="60,10 105,35 105,85 60,110 15,85 15,35" fill="none" stroke="#c4a876" stroke-width="2"/>
+      <polygon points="60,26 89,42 89,78 60,94 31,78 31,42" fill="none" stroke="#5c8a54" stroke-width="1.5"/>
+      <path d="M60 40 L60 80 M42 60 L78 60" stroke="#c25a2e" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="60" cy="60" r="6" fill="#c4a876"/>
+      <circle cx="60" cy="60" r="3" fill="#0d1410"/>
+      <text x="60" y="18" text-anchor="middle" fill="#c4a876" font-size="9" font-family="Oswald" font-weight="700">IX</text>
+    </svg>
+
+    <p class="header-eyebrow">République Galactique · Grande Armée</p>
+    <h1 class="header-title">41ST ELITE CORPS</h1>
+    <p class="header-subtitle">9ème Corps d'Assaut · Légion Luminara Unduli</p>
+
+    <div class="header-line"><span>✦ ✦ ✦</span></div>
+
+    <p class="hero-lead">
+      Reconnaissance, embuscade et guerre en milieu hostile — le 41st opère là où les autres régiments
+      hésitent à s'aventurer. Ce portail regroupe l'ensemble des documents et ressources du régiment,
+      accessibles en un clic.
+    </p>
+
+    <div class="hero-tags">
+      <span class="hero-tag">🌿 Guerre en jungle</span>
+      <span class="hero-tag">🎯 Reconnaissance</span>
+      <span class="hero-tag">⚔️ Assaut rapproché</span>
+      <span class="hero-tag">🗣️ Traduction &amp; interprétariat</span>
+    </div>
+  </header>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item"><span class="stat-num">6</span><span class="stat-label">Spécialisations</span></div>
+    <div class="stat-item"><span class="stat-num">10</span><span class="stat-label">Docs Apprentissage</span></div>
+    <div class="stat-item"><span class="stat-num">7</span><span class="stat-label">Docs Réglementaires</span></div>
+    <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Docs Divers</span></div>
+    <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">Systèmes</span></div>
+  </div>
+
+  <main class="page-content">
+
+    <!-- ACCUEIL -->
+    <div class="section-block" id="accueil">
+      <div class="section-header">
+        <div class="section-icon"><span>🏕</span></div>
+        <div>
+          <div class="section-title">Accueil du Régiment</div>
+          <div class="section-tag">Portail principal du 41st</div>
+        </div>
+      </div>
+      <a class="featured-card" href="https://sites.google.com/view/41st-communautaire/accueil" target="_blank" rel="noopener noreferrer">
+        <div class="featured-icon">⛨</div>
+        <div class="featured-text">
+          <div class="featured-title">9ème Corps d'Assaut — Accueil</div>
+          <div class="featured-desc">Le site officiel du 41st : actualités, présentation du régiment et point d'entrée vers toutes les archives.</div>
+        </div>
+        <div class="featured-arrow">↗</div>
+      </a>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+    <!-- APPRENTISSAGE -->
+    <div class="section-block" id="apprentissage">
+      <div class="section-header">
+        <div class="section-icon"><span>🎖</span></div>
+        <div>
+          <div class="section-title">Apprentissage</div>
+          <div class="section-tag">Formation des nouvelles recrues</div>
+        </div>
+      </div>
+      <div class="link-grid">
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/apprentissage" target="_blank" rel="noopener noreferrer"><span class="link-icon">📋</span><span class="link-name">Apprentissage — Sommaire</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/apprentissage/fiche-recrutement" target="_blank" rel="noopener noreferrer"><span class="link-icon">📝</span><span class="link-name">Fiche Recrutement</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/apprentissage/nouveau-arrivant" target="_blank" rel="noopener noreferrer"><span class="link-icon">🆕</span><span class="link-name">Nouveau Arrivant</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/apprentissage/info-drone" target="_blank" rel="noopener noreferrer"><span class="link-icon">🛸</span><span class="link-name">Info Drone</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/apprentissage/info-barc-speeder" target="_blank" rel="noopener noreferrer"><span class="link-icon">🏍</span><span class="link-name">Info BARC Speeder</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/apprentissage/info-at-pt" target="_blank" rel="noopener noreferrer"><span class="link-icon">🤖</span><span class="link-name">Info AT-PT</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/apprentissage/fiche-procédure-entrainement" target="_blank" rel="noopener noreferrer"><span class="link-icon">🏋</span><span class="link-name">Fiche Procédure Entraînement</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/apprentissage/rôles-des-grades" target="_blank" rel="noopener noreferrer"><span class="link-icon">🎗</span><span class="link-name">Rôles des Grades</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/apprentissage/perso-rp" target="_blank" rel="noopener noreferrer"><span class="link-icon">🪖</span><span class="link-name">Perso RP</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/apprentissage/formations-régimentaire" target="_blank" rel="noopener noreferrer"><span class="link-icon">📡</span><span class="link-name">Formations Régimentaire</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/apprentissage/drill" target="_blank" rel="noopener noreferrer"><span class="link-icon">🥾</span><span class="link-name">DRILL</span><span class="link-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+    <!-- INFORMATION IMPORTANTE -->
+    <div class="section-block" id="info">
+      <div class="section-header">
+        <div class="section-icon"><span>📖</span></div>
+        <div>
+          <div class="section-title">Information Importante</div>
+          <div class="section-tag">Règlements, serment &amp; effectif</div>
+        </div>
+      </div>
+      <div class="link-grid">
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/information-importante" target="_blank" rel="noopener noreferrer"><span class="link-icon">📚</span><span class="link-name">Information Importante — Sommaire</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/information-importante/serment" target="_blank" rel="noopener noreferrer"><span class="link-icon">🤝</span><span class="link-name">Serment</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/information-importante/règlement" target="_blank" rel="noopener noreferrer"><span class="link-icon">📜</span><span class="link-name">Règlement</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/information-importante/règlement-de-mission" target="_blank" rel="noopener noreferrer"><span class="link-icon">🗺</span><span class="link-name">Règlement de Mission</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/information-importante/règlement-reconnaissance" target="_blank" rel="noopener noreferrer"><span class="link-icon">🔭</span><span class="link-name">Règlement Reconnaissance</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/information-importante/règlement-et-guide-promotions" target="_blank" rel="noopener noreferrer"><span class="link-icon">🎖</span><span class="link-name">Règlement &amp; Guide Promotions</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/information-importante/réglementation-des-sanctions-interne" target="_blank" rel="noopener noreferrer"><span class="link-icon">⛔</span><span class="link-name">Réglementation des Sanctions Interne</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/information-importante/effectif" target="_blank" rel="noopener noreferrer"><span class="link-icon">📝</span><span class="link-name">Effectif</span><span class="link-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+    <!-- SPECIALISATION -->
+    <div class="section-block" id="specialisation">
+      <div class="section-header">
+        <div class="section-icon"><span>🎯</span></div>
+        <div>
+          <div class="section-title">Spécialisation</div>
+          <div class="section-tag">Les unités du régiment</div>
+        </div>
+      </div>
+      <div class="link-grid">
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/spécialisation" target="_blank" rel="noopener noreferrer"><span class="link-icon">🗂</span><span class="link-name">Spécialisation — Sommaire</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/spécialisation/compagnie-doom" target="_blank" rel="noopener noreferrer"><span class="link-icon">☠</span><span class="link-name">Compagnie Doom</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/spécialisation/compagnie-improcco" target="_blank" rel="noopener noreferrer"><span class="link-icon">🌲</span><span class="link-name">Compagnie Improcco</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/spécialisation/peloton-de-rangers" target="_blank" rel="noopener noreferrer"><span class="link-icon">🏹</span><span class="link-name">Peloton de Rangers</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/spécialisation/escouade-eryx-médecin" target="_blank" rel="noopener noreferrer"><span class="link-icon">⚕</span><span class="link-name">Escouade Eryx (Médecin)</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/spécialisation/arc-trooper" target="_blank" rel="noopener noreferrer"><span class="link-icon">🎯</span><span class="link-name">ARC Trooper</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/spécialisation/république-commando" target="_blank" rel="noopener noreferrer"><span class="link-icon">🪖</span><span class="link-name">République Commando</span><span class="link-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+    <!-- DIVERS -->
+    <div class="section-block" id="divers">
+      <div class="section-header">
+        <div class="section-icon"><span>🎵</span></div>
+        <div>
+          <div class="section-title">Divers</div>
+          <div class="section-tag">Culture &amp; identité du régiment</div>
+        </div>
+      </div>
+      <div class="link-grid">
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/divers" target="_blank" rel="noopener noreferrer"><span class="link-icon">📦</span><span class="link-name">Divers — Sommaire</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/divers/chant" target="_blank" rel="noopener noreferrer"><span class="link-icon">🎵</span><span class="link-name">Chant</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/divers/signification-ruban" target="_blank" rel="noopener noreferrer"><span class="link-icon">🎗</span><span class="link-name">Signification Ruban</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/divers/tenue-41st" target="_blank" rel="noopener noreferrer"><span class="link-icon">🥋</span><span class="link-name">Tenue 41st</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/divers/galerie-du-régiment" target="_blank" rel="noopener noreferrer"><span class="link-icon">🖼</span><span class="link-name">Galerie du Régiment</span><span class="link-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+    <!-- ESPECES & SYSTEMES -->
+    <div class="section-block" id="monde">
+      <div class="section-header">
+        <div class="section-icon"><span>🌍</span></div>
+        <div>
+          <div class="section-title">Espèces &amp; Systèmes</div>
+          <div class="section-tag">Terrain d'opération du 41st</div>
+        </div>
+      </div>
+      <div class="link-grid">
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/espèces" target="_blank" rel="noopener noreferrer"><span class="link-icon">🧬</span><span class="link-name">Espèces</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/systèmes" target="_blank" rel="noopener noreferrer"><span class="link-icon">🪐</span><span class="link-name">Systèmes — Sommaire</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/systèmes/kashyyyk" target="_blank" rel="noopener noreferrer"><span class="link-icon">🌳</span><span class="link-name">Kashyyyk</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/systèmes/yavin-iv" target="_blank" rel="noopener noreferrer"><span class="link-icon">🌕</span><span class="link-name">Yavin IV</span><span class="link-arrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+    <!-- DOCUMENTS TIERS -->
+    <div class="section-block" id="documents">
+      <div class="section-header">
+        <div class="section-icon"><span>🗃</span></div>
+        <div>
+          <div class="section-title">Documents Tiers</div>
+          <div class="section-tag">Ressources complémentaires</div>
+        </div>
+      </div>
+      <div class="link-grid">
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/documents-tiers" target="_blank" rel="noopener noreferrer"><span class="link-icon">🗃</span><span class="link-name">Documents Tiers — Sommaire</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/documents-tiers/fiche-technique" target="_blank" rel="noopener noreferrer"><span class="link-icon">🔧</span><span class="link-name">Fiche Technique</span><span class="link-arrow">↗</span></a>
+        <a class="link-card" href="https://sites.google.com/view/41st-communautaire/documents-tiers/recensement-docs" target="_blank" rel="noopener noreferrer"><span class="link-icon">📇</span><span class="link-name">Recensement Docs</span><span class="link-arrow">↗</span></a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="footer-text"><span>41ST ELITE CORPS</span> · 9ème Corps d'Assaut · Grande Armée de la République</p>
+  <p class="footer-sub">Portail non-officiel généré à partir des archives publiques du régiment</p>
+</footer>
+
+</body>
+</html>
